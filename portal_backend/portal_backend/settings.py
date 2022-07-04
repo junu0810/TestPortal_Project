@@ -26,10 +26,15 @@ SECRET_KEY = 'django-insecure-$q0f8qaqbz1&+jr3)@m8%(xg#pr4$)g0y2tq*#0c2p$atj=%6c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
-CORS_ORIGIN_WHITELIST = ['http://127.0.0.1:3000'
-                         ,'http://localhost:3000']
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000',
+                         'http://localhost:3001']
+
+CORS_ALLOWED_ORIGINS = ["http://localhost:3001",
+                        "http://localhost:3000",
+                        'http://localhost:8000']
+
 CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
@@ -54,13 +59,13 @@ JWT_AUTH = {
 }
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
     'rest_framework'
 ]
 

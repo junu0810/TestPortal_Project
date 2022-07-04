@@ -1,9 +1,10 @@
 from datetime import datetime
 from email import message
 from time import timezone
-from django.http import  JsonResponse
+from django.http import  HttpResponseRedirect, JsonResponse
 import datetime
 import json, jwt
+from django.shortcuts import redirect
 import time
 
 
@@ -30,6 +31,7 @@ def signin(request):
     else:
         response = JsonResponse({'message': decoded }, status= 200)
         response.set_cookie('auth',encoded, expires=expired)
+        response["Access-Control-Allow-Origin"] = "*"
         return response
 
     #착안사항
@@ -38,5 +40,14 @@ def signin(request):
 def getDashBoard(request):
     auth = request.COOKIES.get('auth')
     print('쿠키를 받았어요' + auth)
-    return JsonResponse({'message':'ok'} , status =200)
 
+    res = HttpResponseRedirect('http://localhost:3001')
+    res.headers[  'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8']
+
+    return res
+
+    # return redirect('http://localhost:3001')
+    # return JsonResponse({'message':'ok'} , status =200)
+
+    #Access-Control-Allow-Origin으로 다른 주소로의 요청을 막는다
+    #

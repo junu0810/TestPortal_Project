@@ -29,16 +29,15 @@ function App() {
   }
 
   const getProject = () =>{
+    console.log('프로젝트를클릭하였다.')
     axios.post('http://localhost:8000/user/Dashboard', {
       data: sendData
-    },
-      { withCredentials: true }
-    )
-      .then(res => {
-        setauth(true)
-        console.log(res.data.message.data)
-      })
-    console.log('프로젝트를클릭하였다.')
+    },{headers: {
+      "Access-Control-Allow-Origin": "*",
+    }},{ withCredentials: true})
+    .then(res => {
+      setauth(true)   
+    })
   }
 
   return (
