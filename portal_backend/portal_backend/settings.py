@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+
 CORS_ORIGIN_WHITELIST = ['http://localhost:3000',
                          'http://localhost:3001']
 
@@ -36,6 +37,8 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:3001",
                         'http://localhost:8000']
 
 CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
 
 # Application definition
 

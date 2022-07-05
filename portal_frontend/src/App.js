@@ -30,11 +30,10 @@ function App() {
 
   const getProject = () =>{
     console.log('프로젝트를클릭하였다.')
-    axios.post('http://localhost:8000/user/Dashboard', {
-      data: sendData
-    },{headers: {
-      "Access-Control-Allow-Origin": "*",
-    }},{ withCredentials: true})
+    axios.post('http://127.0.0.1:8000/user/Dashboard',
+    {headers: {"Access-Control-Allow-Origin": "http://localhost:3000"} },
+    {withCredentials: true}
+    )
     .then(res => {
       setauth(true)   
     })
