@@ -1,7 +1,6 @@
+from csv import reader
 from datetime import datetime
-from email import message
-from telnetlib import STATUS
-from time import timezone
+
 from django.http import  HttpResponseRedirect, JsonResponse
 import datetime
 import json, jwt
@@ -62,5 +61,12 @@ def getDashBoard(request):
         
     #else:
     print('반응')
-    res = HttpResponseRedirect('http://localhost:3001', status=301)
-    return res
+    # res = HttpResponseRedirect('https://localhost:3001/', status=301)
+    # res.headers.setdefault(key='Access-Control-Allow-Origin',value='http://localhost:3000')
+    # return res
+    # return redirect('https://hms.imtrial.com')
+    # dataURL = json.loads(request.body.decode('utf-8'))
+    # print(dataURL['url'])
+    return redirect('http://localhost:3001')
+    # return redirect(dataURL['url'])
+    # return reader(request,'http://localhost:3000')

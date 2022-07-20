@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 import datetime
 
@@ -26,17 +27,21 @@ SECRET_KEY = 'django-insecure-$q0f8qaqbz1&+jr3)@m8%(xg#pr4$)g0y2tq*#0c2p$atj=%6c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost','127.0.0.1','127.30.1.47']
 
+XS_SHARING_ALLOWED_ORIGINS = " http://localhost:3000"
+XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
 
-CORS_ORIGIN_WHITELIST = ['http://localhost:3000',
-                         'http://localhost:3001']
 
 CORS_ALLOWED_ORIGINS = ["http://localhost:3001",
                         "http://localhost:3000",
-                        'http://localhost:8000']
+                        "http://127.0.0.1:3000",
+                        "http://'127.30.1.47':3000"]
 
+CORS_ORIGIN_WHITELIST = ['localhost']
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
 CSRF_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SAMESITE = 'None'
 
@@ -71,7 +76,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework'
 ]
-
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.security.SecurityMiddleware',
@@ -81,6 +85,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'portal_backend.middleware.crossdomain.XsSharing'
 ]
 
 ROOT_URLCONF = 'portal_backend.urls'
@@ -88,7 +93,7 @@ ROOT_URLCONF = 'portal_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -150,7 +155,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'build/static')
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
