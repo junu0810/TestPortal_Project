@@ -1,5 +1,7 @@
 from csv import reader
 from datetime import datetime
+from telnetlib import STATUS
+from tokenize import Token
 
 from django.http import  HttpResponseRedirect, JsonResponse
 import datetime
@@ -36,6 +38,7 @@ def signin(request):
         print(decoded)
         response = JsonResponse({'message': decoded }, status= 200)
         response.set_cookie('auth',encoded, expires=expired)
+        response['HeadersToken'] = "Token"
         return response
 
     #착안사항
@@ -67,6 +70,9 @@ def getDashBoard(request):
     # return redirect('https://hms.imtrial.com')
     # dataURL = json.loads(request.body.decode('utf-8'))
     # print(dataURL['url'])
-    return redirect('http://localhost:3001')
+    # return redirect('http://localhost:3001')
     # return redirect(dataURL['url'])
     # return reader(request,'http://localhost:3000')
+    print("클라이언트에서 보낸 요청의 쿠키" + request.COOKIES['auth'])
+    print("클라이언트에서 보낸 헤더의 토큰" + request[Token])
+    return JsonResponse({"message":"data"})

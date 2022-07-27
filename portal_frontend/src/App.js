@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+axios.defaults.withCredentials = true;
+
+
 function App() {
 
   const [data, setDate] = useState('')
   const [auth, setauth] = useState(false)
+  const [url, setURL] = useState('')
 
   const sendData = (event) => {
     event.preventDefault()
@@ -19,26 +23,33 @@ function App() {
   const sendaxios = (sendData) => {
     axios.post('http://localhost:8000/user/', {
       data: sendData
-    },
-      { withCredentials: true }
-    )
+    })
       .then(res => {
-        setauth(true)
-        console.log(res.data.message.data)
+        setauth(false)
       })
   }
 
-  const getProject = () =>{
-    console.log('프로젝트를클릭하였다.')
-    axios.post('http://127.0.0.1:8000/user/Dashboard',
-    {headers: {"Access-Control-Allow-Origin": "http://localhost:3000"} },
-    {withCredentials: true}
+  const getProject = () => {
+    console.log('go localhost:3001')
+    axios.post('http://localhost:8000/user/Dashboard', {
+      url: url
+    }
     )
-    .then(res => {
-      setauth(true)   
-    })
+      .then(res => {
+        setauth(true)
+      })
   }
 
+  const URLChange = ({ target: { value } }) => {
+    setURL(value)
+  }
+
+  const TestAPI = () => {
+    axios.post('http://localhost:8000/user/Dashboard',{
+      'make':"data"
+    })
+  }
+ 
   return (
     <div>{
       auth ?
@@ -46,14 +57,20 @@ function App() {
           <button onClick={getProject} >
             P1으로 가는길~~
           </button>
+          <input onChange={URLChange}></input>
         </div>
         :
         <div>
-          <form onSubmit={(event) => sendData(event)}>
-            값을 입력하시오
-            <input onChange={handleChange}></input>
-            <button type='submit'>입력</button>
-          </form>
+
+          <div>
+            <form onSubmit={(event) => sendData(event)}>
+              값을 입력하시오
+              <input onChange={handleChange}></input>
+              <button type='submit'>입력</button>
+            </form>
+          </div>
+          <br/>
+          <button onClick={TestAPI}>헤더에 토큰이 있을까요??</button>
         </div>
     }
     </div>
