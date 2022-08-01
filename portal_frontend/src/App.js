@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 
 function App() {
@@ -14,18 +14,21 @@ function App() {
     event.preventDefault()
     // console.log(data)
     sendaxios(data)
-  }
+  } 
 
   const handleChange = ({ target: { value } }) => {
     setDate(value)
   }
 
   const sendaxios = (sendData) => {
-    axios.post('http://localhost:8000/user/', {
-      data: sendData
+    axios.post("https://kauth.kakao.com/oauth/token", {
+    "grant_type":"authorization_code",
+    "client_id":"e02e8f96382ec4e206b3f45082e87750",  
+    "redirect_url" : "https://localhost:3000",
+    "code":"W3RB0aNJuo72lAAtQ1bKTMewla4Tv_2FVuVc3H6jDDXSo49t4TUKCKmkyNRVXOxnWbGJPgorDNIAAAGCQ5U7zw"
     })
       .then(res => {
-        setauth(false)
+        console.log(res)
       })
   }
 
