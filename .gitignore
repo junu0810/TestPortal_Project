@@ -1,5 +1,5 @@
 .ide 
-/KaKaoAuth/KaKaoAuth/KaKao.config
 /portal_frontend/.env
 /TESTENV
 /
+/Authentication/Authentication/settings.py
