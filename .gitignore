@@ -3,3 +3,6 @@
 /TESTENV
 /
 /Authentication/Authentication/settings.py
+potal_porject/config/config/settings/dev_settings.py
+potal_porject/config/users/migrations
+potal_porject/.PotalENV
