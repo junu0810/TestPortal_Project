@@ -1,6 +1,7 @@
 from django.urls import path
-from potal_porject.config.users.views import hello_world
+from .views import hello_world,users
 
 urlpatterns = [
-    path('hello_world/', hello_world),
+    path('hello_world/', hello_world.as_view()),
+    path('' , users.as_view()),
 ]
